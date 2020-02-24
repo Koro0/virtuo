@@ -161,3 +161,28 @@ const actors = [{
 console.log(cars);
 console.log(rentals);
 console.log(actors);
+
+// Step 1
+
+function WhichCar (id)
+{
+  for(var i = 0; i<cars.length; i++)
+  {
+    if (cars[i].id == id)
+    {
+      return cars[i];
+    }
+  }
+}
+for(var i = 0; i<rentals.length; i++)
+{
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) / 86400000;
+  rentals[i].price = WhichCar(rentals[i].carId).price;
+  rentals[i].price = (day * cars[i].pricePerDay) + (rentals[i].distance * cars[i].pricePerKm);
+  console.log(rentals[i].price);
+}
+
+
+
+
+//Step 2

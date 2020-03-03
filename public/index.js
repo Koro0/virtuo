@@ -176,13 +176,52 @@ function WhichCar (id)
 }
 for(var i = 0; i<rentals.length; i++)
 {
-  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) / 86400000;
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
   rentals[i].price = WhichCar(rentals[i].carId).price;
   rentals[i].price = (day * cars[i].pricePerDay) + (rentals[i].distance * cars[i].pricePerKm);
   console.log(rentals[i].price);
 }
 
-
-
-
 //Step 2
+
+for(var i = 0; i<rentals.length; i++)
+{
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
+  
+    if (day>=1 && day<=4) {
+      rentals[i].price = rentals[i].price*0.9;
+      
+    } else  if (day>=5 && day<=10) {
+      rentals[i].price = rentals[i].price*0.7;
+      
+    } else if (day>=11) {
+      rentals[i].price = rentals[i].price*0.5;
+      
+    }
+    console.log(rentals[i].price);
+}
+
+//Step 3
+
+for(var i = 0; i<rentals.length; i++)
+{
+  rentals[i].commission.insurance = rentals[i].price * 15/100;
+  rentals[i].commission.treasury = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
+  rentals[i].commission.virtuo = rentals[i].price *0.3 - rentals[i].commission.treasury - rentals[i].commission.insurance;
+  console.log(rentals[i].commission);
+}
+
+//Step 4
+
+for(var i = 0; i<rentals.length; i++)
+{
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
+  if (rentals[i].options.deductibleReduction = true) {
+    rentals[i].price = rentals[i].price + (day * 4);
+  }
+  console.log(rentals[i].price);
+}
+
+//Step 5
+
+

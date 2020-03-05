@@ -223,5 +223,22 @@ for(var i = 0; i<rentals.length; i++)
 }
 
 //Step 5
-
+for(var i = 0; i<actors.length; i++)
+{
+  for(var j = 0; j<rentals.length; j++)
+  {
+    switch (actors[i].payment.who) {
+      case 'driver':
+        actors[i].payment.amount = rentals[j].price;
+        break;
+      case 'partner':
+        actors[i].payment.amount = rentals[j].price - rentals[j].commission;
+      case 'insurance' :
+        actors[i].payment.amount = rentals[j].commission;
+      case 'treasury' :
+        actors[i].payment.amount = rentals[j].commission.treasury; 
+      break;
+    }
+  }
+}
 

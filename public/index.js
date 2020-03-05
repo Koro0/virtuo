@@ -233,12 +233,17 @@ for(var i = 0; i<actors.length; i++)
         break;
       case 'partner':
         actors[i].payment.amount = rentals[j].price - rentals[j].commission;
+        break;
       case 'insurance' :
         actors[i].payment.amount = rentals[j].commission;
+        break;
       case 'treasury' :
         actors[i].payment.amount = rentals[j].commission.treasury; 
       break;
+      case 'virtuo' :
+        actors[i].payment.amount = rentals[j].commission.treasury;
     }
+    console.log(actors);
   }
 }
 

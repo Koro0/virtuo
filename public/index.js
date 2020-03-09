@@ -176,9 +176,8 @@ function WhichCar (id)
 }
 for(var i = 0; i<rentals.length; i++)
 {
-  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
-  rentals[i].price = WhichCar(rentals[i].carId).price;
-  rentals[i].price = (day * cars[i].pricePerDay) + (rentals[i].distance * cars[i].pricePerKm);
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24 +1;
+    rentals[i].price = (day * cars[i].pricePerDay) + (rentals[i].distance * cars[i].pricePerKm);
   console.log(rentals[i].price);
 }
 
@@ -186,9 +185,9 @@ for(var i = 0; i<rentals.length; i++)
 
 for(var i = 0; i<rentals.length; i++)
 {
-  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24+1;
   
-    if (day>=1 && day<=4) {
+    if (day>=2 && day<=4) {
       rentals[i].price = rentals[i].price*0.9;
       
     } else  if (day>=5 && day<=10) {
@@ -205,9 +204,9 @@ for(var i = 0; i<rentals.length; i++)
 
 for(var i = 0; i<rentals.length; i++)
 {
-  rentals[i].commission.insurance = rentals[i].price * 15/100;
-  rentals[i].commission.treasury = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
-  rentals[i].commission.virtuo = rentals[i].price *0.3 - rentals[i].commission.treasury - rentals[i].commission.insurance;
+  rentals[i].commission.insurance = rentals[i].price * 30/100/2;
+  rentals[i].commission.treasury = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24+1;
+  rentals[i].commission.virtuo = rentals[i].price *30/100 - rentals[i].commission.treasury - rentals[i].commission.insurance;
   console.log(rentals[i].commission);
 }
 
@@ -215,11 +214,15 @@ for(var i = 0; i<rentals.length; i++)
 
 for(var i = 0; i<rentals.length; i++)
 {
-  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24;
-  if (rentals[i].options.deductibleReduction = true) {
+  var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24+1;
+  if (rentals[i].options.deductibleReduction == true) {
     rentals[i].price = rentals[i].price + (day * 4);
   }
   console.log(rentals[i].price);
+  if (rentals[i].options.deductibleReduction == true) {
+  rentals[i].virtuo = rentals[i].virtuo + (day *4);
+  }
+  console.log(rentals[i].virtuo);
 }
 
 //Step 5

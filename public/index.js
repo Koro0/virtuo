@@ -217,12 +217,10 @@ for(var i = 0; i<rentals.length; i++)
   var day = (new Date(rentals[i].returnDate) - new Date(rentals[i].pickupDate)) /1000/60/60/24+1;
   if (rentals[i].options.deductibleReduction == true) {
     rentals[i].price = rentals[i].price + (day * 4);
+    rentals[i].commission.virtuo = rentals[i].commission.virtuo + (day *4);
   }
   console.log(rentals[i].price);
-  if (rentals[i].options.deductibleReduction == true) {
-  rentals[i].virtuo = rentals[i].virtuo + (day *4);
-  }
-  console.log(rentals[i].virtuo);
+  console.log(rentals[i].commission.virtuo);
 }
 
 //Step 5
@@ -230,23 +228,13 @@ for(var i = 0; i<actors.length; i++)
 {
   for(var j = 0; j<rentals.length; j++)
   {
-    switch (actors[i].payment.who) {
-      case 'driver':
-        actors[i].payment.amount = rentals[j].price;
-        break;
-      case 'partner':
-        actors[i].payment.amount = rentals[j].price - rentals[j].commission;
-        break;
-      case 'insurance' :
-        actors[i].payment.amount = rentals[j].commission;
-        break;
-      case 'treasury' :
-        actors[i].payment.amount = rentals[j].commission.treasury; 
-      break;
-      case 'virtuo' :
-        actors[i].payment.amount = rentals[j].commission.treasury;
-    }
-    console.log(actors);
+    var commission = rentals[j].commission.treasury + rentals[j].commission.virtuo + rentals[j].commission.insurance;
+    if (actors[i].rentalId == rentals[i].id) {
+      actors[i].payment[0].amount = rentals[j].price;
+      actors[i].payment[1].amount = rentals[j].price - rentals[j].commission;
+      actors[i].payment[2].amount = rentals[j].price *0.3;
+      actors[i].payment[3].amount = rentals[j].commission.treasury;
+      actors[i].payment[4].amount = rentals[j].commission.treasury;}
   }
 }
-
+console.log(actors);

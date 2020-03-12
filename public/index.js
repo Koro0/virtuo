@@ -228,7 +228,7 @@ for(var i = 0; i<actors.length; i++)
 {
   for(var j = 0; j<rentals.length; j++)
   {
-    if (actors[i].rentalId == rentals[i].id) {
+    if (actors[i].rentalId == rentals[j].id) {
       actors[i].payment[0].amount = rentals[j].price;
       actors[i].payment[1].amount = rentals[j].price *70/100;
       actors[i].payment[2].amount = rentals[j].commission.insurance;
@@ -236,5 +236,5 @@ for(var i = 0; i<actors.length; i++)
       actors[i].payment[4].amount = rentals[j].commission.virtuo;}
   }
 }
-console.log(actors[i].payment[0].amount);
+console.log(actors);
 

@@ -228,13 +228,13 @@ for(var i = 0; i<actors.length; i++)
 {
   for(var j = 0; j<rentals.length; j++)
   {
-    var commission = rentals[j].commission.treasury + rentals[j].commission.virtuo + rentals[j].commission.insurance;
     if (actors[i].rentalId == rentals[i].id) {
       actors[i].payment[0].amount = rentals[j].price;
-      actors[i].payment[1].amount = rentals[j].price - rentals[j].commission;
-      actors[i].payment[2].amount = rentals[j].price *0.3;
+      actors[i].payment[1].amount = rentals[j].price *70/100;
+      actors[i].payment[2].amount = rentals[j].commission.insurance;
       actors[i].payment[3].amount = rentals[j].commission.treasury;
-      actors[i].payment[4].amount = rentals[j].commission.treasury;}
+      actors[i].payment[4].amount = rentals[j].commission.virtuo;}
   }
 }
-console.log(actors);
+console.log(actors[i].payment[0].amount);
+
